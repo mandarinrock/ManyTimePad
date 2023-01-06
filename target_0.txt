@@ -1,0 +1,11 @@
+mT xor k = cT = 50
+cT xor c1 = 3
+cT xor c2 = 17
+cT xor c3 = 0
+cT xor c4 = 0
+cT xor c5 = 13
+cT xor c6 = 0
+cT xor c7 = 0
+cT xor c8 = 3
+cT xor c9 = 21
+cT xor c10 = 116
