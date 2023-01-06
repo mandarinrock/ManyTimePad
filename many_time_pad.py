@@ -75,27 +75,56 @@ def decoder():
     # print(cipher_list[0][0])
     # print(cipher_list[1][0])
 
+def test_all_xor(xor):
+    print("xor: " + str(xor))
+    for possible in alphabet:
+        print("possible: " + possible)
+        result = chr(ord(possible) ^ xor)
+        if result in alphabet:
+            print("\tresult: " + result)
+
+
 def main():
 
+    # test_all_xor(77)
+    # return
+
     decoder()
-    # print(type((cipher_list[0][0] ^ cipher_list[1][0])))
-    # print((cipher_list[0][0] ^ cipher_list[1][0]))
+    plain_text = ""
     for pos in range(len(cipher_list[0])):
+        print("Position: " + str(pos))
+        print("Target: " + str(cipher_list[0][pos]))
+        # valid_letters = [True] * len(alphabet)
         valid_letters = [True] * len(alphabet)
+        best_letters = [0] * len(alphabet)
         for cipher in cipher_list[1:]:
             first_xor = cipher_list[0][pos] ^ cipher[pos]
+            # print("Cipher: " + str(cipher[pos]))
             for idx in range(len(alphabet)):
                 if chr(first_xor ^ ord(alphabet[idx])) not in alphabet:
                     valid_letters[idx] = False
-                # else:
-                #     print(alphabet[idx], end="")
-            # print()
+                else:
+                    print(alphabet[idx], end="")
+                    best_letters[idx] += 1
+            print()
 
         # print(valid_letters)
-        for idx in range(len(valid_letters)):
-            if valid_letters[idx]:
-                print(alphabet[idx], end="")
-        print()
+        # for idx in range(len(valid_letters)):
+        #     if valid_letters[idx]:
+        #         print(alphabet[idx], end="")
+        #         plain_text += alphabet[idx]
+        best_letter = 0
+        best_idx = 0
+        for idx in range(len(best_letters)):
+            if best_letters[idx] > best_letter:
+                best_letter = best_letters[idx]
+                best_idx = idx
+        print(alphabet[best_idx], end=" ")
+        print(best_letters)
+        plain_text += alphabet[best_idx]
+        # print()
+    print()
+    print(plain_text)
 
 
     return
