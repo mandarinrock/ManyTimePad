@@ -72,17 +72,17 @@ def decoder():
     for i in range(len(cipher_list)):
         # cipher_list[i] = hex_splitter(cipher_list[i])
         cipher_list[i] = bytes.fromhex(cipher_list[i])
-    print(cipher_list[0][0])
-    print(cipher_list[1][0])
-    print(cipher_list[2][0])
-    print(cipher_list[3][0])
-    print(cipher_list[4][0])
-    print(cipher_list[5][0])
-    print(cipher_list[6][0])
-    print(cipher_list[7][0])
-    print(cipher_list[8][0])
-    print(cipher_list[9][0])
-    print(cipher_list[10][0])
+    # print(cipher_list[0][0])
+    # print(cipher_list[1][0])
+    # print(cipher_list[2][0])
+    # print(cipher_list[3][0])
+    # print(cipher_list[4][0])
+    # print(cipher_list[5][0])
+    # print(cipher_list[6][0])
+    # print(cipher_list[7][0])
+    # print(cipher_list[8][0])
+    # print(cipher_list[9][0])
+    # print(cipher_list[10][0])
 
 
 def test_all_xor(xor):
@@ -90,8 +90,8 @@ def test_all_xor(xor):
     for possible in alphabet:
         # print("possible: " + possible)
         result = chr(ord(possible) ^ xor)
-        if result in alphabet:
-            print(ord(result), end=" ")
+        # if result in alphabet:
+        #     print(ord(result), end=" ")
 
 def decrypt(cipher, key):
     if len(cipher) < len(key):
@@ -104,6 +104,13 @@ def decrypt(cipher, key):
             letter= chr(cipher[i] ^ key[i])
             print(letter, end="")
         print()
+
+def get_longest_length(lists):
+    longest = 0
+    for i in range(len(lists)):
+        if len(lists[i]) > longest:
+            longest = len(lists[i])
+    return longest
 
 
 def main():
@@ -120,9 +127,12 @@ def main():
 
     # return
     plain_text = ""
+    # key_scores = []
+    # for i in range(get_longest_length(cipher_list)):
+    #     key_scores.append([0] * 256)
     for pos in range(len(cipher_list[0])):
-        print("Position: " + str(pos))
-        print("Target: " + str(cipher_list[0][pos]))
+        # print("Position: " + str(pos))
+        # print("Target: " + str(cipher_list[0][pos]))
         # valid_letters = [True] * len(alphabet)
         valid_letters = [True] * len(alphabet)
         best_letters = [0] * len(alphabet)
@@ -133,9 +143,9 @@ def main():
                 if chr(first_xor ^ ord(alphabet[idx])) not in alphabet:
                     valid_letters[idx] = False
                 else:
-                    print(alphabet[idx], end="")
+                    # print(alphabet[idx], end="")
                     best_letters[idx] += 1
-            print()
+            # print()
 
         # print(valid_letters)
         # for idx in range(len(valid_letters)):
@@ -148,14 +158,28 @@ def main():
             if best_letters[idx] > best_letter:
                 best_letter = best_letters[idx]
                 best_idx = idx
-        print(alphabet[best_idx], end=" ")
-        print(best_letters)
+        # print(alphabet[best_idx], end=" ")
+        # print(best_letters)
         plain_text += alphabet[best_idx]
+        # for idx in range(len(best_letters)):
+        #     # print(cipher_list[0][pos])
+        #     # print(idx)
+        #     idx_xor = cipher_list[0][pos] ^ idx
+        #     # print(idx_xor, end=" ")
+        #     key_scores[pos][idx_xor] += best_letters[idx]
         # print()
-    print()
-    print(plain_text)
+    # print()
+    # print(plain_text)
 
     key = []
+    # for i in range(len(key_scores)):
+    #     best_score = 0
+    #     best_idx = 0
+    #     for idx in range(len(key_scores[i])):
+    #         if key_scores[i][idx] > best_score:
+    #             best_score = key_scores[i][idx]
+    #             best_idx = idx
+    #     key.append(best_idx)
     for i in range(len(cipher_list[0])):
         key.append(cipher_list[0][i] ^ ord(plain_text[i]))
     print("key:", key)
