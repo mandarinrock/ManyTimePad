@@ -72,24 +72,53 @@ def decoder():
     for i in range(len(cipher_list)):
         # cipher_list[i] = hex_splitter(cipher_list[i])
         cipher_list[i] = bytes.fromhex(cipher_list[i])
-    # print(cipher_list[0][0])
-    # print(cipher_list[1][0])
+    print(cipher_list[0][0])
+    print(cipher_list[1][0])
+    print(cipher_list[2][0])
+    print(cipher_list[3][0])
+    print(cipher_list[4][0])
+    print(cipher_list[5][0])
+    print(cipher_list[6][0])
+    print(cipher_list[7][0])
+    print(cipher_list[8][0])
+    print(cipher_list[9][0])
+    print(cipher_list[10][0])
+
 
 def test_all_xor(xor):
     print("xor: " + str(xor))
     for possible in alphabet:
-        print("possible: " + possible)
+        # print("possible: " + possible)
         result = chr(ord(possible) ^ xor)
         if result in alphabet:
-            print("\tresult: " + result)
+            print(ord(result), end=" ")
+
+def decrypt(cipher, key):
+    if len(cipher) < len(key):
+        for i in range(len(cipher)):
+            letter= chr(cipher[i] ^ key[i])
+            print(letter, end="")
+        print()
+    else:
+        for i in range(len(key)):
+            letter= chr(cipher[i] ^ key[i])
+            print(letter, end="")
+        print()
 
 
 def main():
 
+    # for i in range(127):
+    #     print(i)
+    #     test_all_xor(i)
+    #     print()
     # test_all_xor(77)
     # return
 
     decoder()
+    # for i in range(len(cipher_list)):
+
+    # return
     plain_text = ""
     for pos in range(len(cipher_list[0])):
         print("Position: " + str(pos))
@@ -125,6 +154,16 @@ def main():
         # print()
     print()
     print(plain_text)
+
+    key = []
+    for i in range(len(cipher_list[0])):
+        key.append(cipher_list[0][i] ^ ord(plain_text[i]))
+    print("key:", key)
+
+    for cipher in cipher_list:
+        decrypt(cipher, key)
+
+
 
 
     return
